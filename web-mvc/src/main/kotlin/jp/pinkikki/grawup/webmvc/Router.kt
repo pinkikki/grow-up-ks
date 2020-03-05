@@ -2,7 +2,7 @@ package jp.pinkikki.grawup.webmvc
 
 import jp.pinkikki.grawup.webmvc.framework.RequestLogging
 
-class Router(private val requestLogging: RequestLogging, private val questionRouter: QuestionRouter, private val answerRouter: AnswerRouter) {
+class Router(private val requestLogging: RequestLogging, private val lifeRouter: LifeRouter, private val babyRouter: BabyRouter) {
 
-    fun routes() = questionRouter.routes().and(answerRouter.routes()).filter(requestLogging::filter)
+    fun routes() = lifeRouter.routes().and(babyRouter.routes()).filter(requestLogging::filter)
 }
