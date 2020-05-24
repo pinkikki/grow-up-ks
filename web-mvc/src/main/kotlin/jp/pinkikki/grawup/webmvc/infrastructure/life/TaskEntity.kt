@@ -6,11 +6,10 @@ import javax.persistence.Id
 
 @Entity
 data class TaskEntity(
-        @Id
-        @GeneratedValue
-        val id: Int,
-        val content: String,
-        val categoryId: Int,
-        val targetTime: String,
-        val notification: Boolean
+    @Id
+    @GeneratedValue
+    val id: Int,
+    val content: String,
+    val categoryId: Int,
+    val notification: Boolean
 )
