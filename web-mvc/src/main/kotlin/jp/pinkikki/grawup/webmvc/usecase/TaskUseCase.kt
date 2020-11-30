@@ -2,20 +2,41 @@ package jp.pinkikki.grawup.webmvc.usecase
 
 import jp.pinkikki.grawup.webmvc.application.TaskRequest
 import jp.pinkikki.grawup.webmvc.domain.life.Task
+import jp.pinkikki.grawup.webmvc.domain.life.TaskNotification
+import jp.pinkikki.grawup.webmvc.domain.life.TaskNotificationRepository
 import jp.pinkikki.grawup.webmvc.domain.life.TaskRepository
+import java.time.LocalDateTime
 
-class TaskUseCase(private val repo: TaskRepository) {
+class TaskUseCase(
+    private val taskRepo: TaskRepository,
+    private val taskNotificationRepo: TaskNotificationRepository,
+) {
 
-    fun list(): List<Task> = repo.list()
+    fun list(): List<Task> = taskRepo.list()
 
     fun save(taskRequest: TaskRequest): Task {
-        return repo.save(
+        val task = taskRepo.save(
             Task(
                 -1,
                 taskRequest.content,
                 taskRequest.categoryId,
-                taskRequest.notification
+                listOf(),
             )
+        )
+        val taskNofication = taskNotificationRepo.save(
+            TaskNotification(
+                -1,
+                task.id,
+                "issyosan.wav",
+                LocalDateTime.now()
+            )
+        )
+
+        return Task(
+            task.id,
+            task.content,
+            task.categoryId,
+            listOf(taskNofication)
         )
     }
 }

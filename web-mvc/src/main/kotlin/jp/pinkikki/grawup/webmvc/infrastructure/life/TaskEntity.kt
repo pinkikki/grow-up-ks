@@ -1,8 +1,6 @@
 package jp.pinkikki.grawup.webmvc.infrastructure.life
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 
 @Entity
 data class TaskEntity(
@@ -11,5 +9,7 @@ data class TaskEntity(
     val id: Int,
     val content: String,
     val categoryId: Int,
-    val notification: Boolean
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = false, insertable = false, updatable = false, name = "taskId")
+    val taskNotifications: List<TaskNotificationEntity>
 )
