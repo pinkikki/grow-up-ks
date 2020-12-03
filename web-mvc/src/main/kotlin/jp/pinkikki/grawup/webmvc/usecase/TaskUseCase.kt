@@ -23,7 +23,7 @@ class TaskUseCase(
                 listOf(),
             )
         )
-        val taskNofication = taskNotificationRepo.save(
+        val taskNotification = taskNotificationRepo.save(
             TaskNotification(
                 -1,
                 task.id,
@@ -36,7 +36,7 @@ class TaskUseCase(
             task.id,
             task.content,
             task.categoryId,
-            listOf(taskNofication)
+            listOf(taskNotification)
         )
     }
 }
